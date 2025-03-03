@@ -13,6 +13,12 @@ This project demonstrates how to build an ETL pipeline using Python, AWS service
 ### Project Overview
 This project focuses on building a scalable ETL pipeline that automates the extraction of data from Spotify's "Discover Weekly" playlist, transforms the data into a usable format, and loads the results into Snowflake for real-time insights and querying. The pipeline is designed to handle data from the "Discover Weekly" playlist, which is updated weekly and contains 30 personalized songs.
 
+
+
+![Figure 1: Architecture of Spotify Data Automation Pipeline using AWS Glue Crawler, Glue Data Catalog, and Athena](sp2.jpeg)
+![Architecture of Spotify Data Automation Pipeline using Snowflake ](sp1.gif)
+
+
 ### Architecture Overview
 * Spotify API: Data is fetched from the Spotify "Discover Weekly" playlist using the Spotipy Python library.
 * AWS Lambda: Serverless functions handle both data extraction from Spotify and transformation of the data.
