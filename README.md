@@ -23,7 +23,9 @@ This project focuses on building a scalable ETL pipeline that automates the extr
 * Spotify API: Data is fetched from the Spotify "Discover Weekly" playlist using the Spotipy Python library.
 * AWS Lambda: Serverless functions handle both data extraction from Spotify and transformation of the data.
 * Amazon S3: Raw and transformed data is stored in S3 buckets organized into different folders for various stages of processing.
+  ![Glue Crawler ](images/cr1.png)\
 * AWS Glue: Automates data cataloging and transformation tasks, enabling the pipeline to maintain an organized metadata repository.
+  ![Glue Crawler ](images/ct1.png)\
 * Snowflake: The transformed data is loaded into Snowflake for advanced querying and analysis, enabling real-time insights.
 * AWS CloudWatch & EventBridge: Used for scheduling Lambda functions and monitoring the pipeline.
 ### ETL Process Overview
@@ -37,11 +39,13 @@ Data stored in S3 triggers a Lambda function for transformation.
 The transformation step cleans and organizes the data, separating it into categories like artist data, album data, and song data.
 The transformed data is then stored in the transformed data folder in S3.
 #### Load:
+![Athena](images/athena.png)\ 
 ###### Architecture of Spotify Data Automation Pipeline using Snowflake
 ![Architecture of Spotify Data Automation Pipeline using Snowflake ](sp1.gif)\
 
 The transformed data is loaded into Snowflake.
 Snowflake’s integration with S3 allows it to load data from the S3 bucket using the COPY INTO command, making it easy to analyze the data within Snowflake’s environment.
+![Snowflake](images/S1.png)\ 
 #### Folder Structure
 /spotify_etl (Main folder in S3)\
 /raw_data (Storage for raw data)\
@@ -50,6 +54,8 @@ Snowflake’s integration with S3 allows it to load data from the S3 bucket usin
 /album_data (Transformed album data)\
 /artist_data (Transformed artist data)\
 /song_data (Transformed song data)\
+
+![Snowflake](images/S2.png)\ 
 ### Steps Involved in the Pipeline
 * Data Extraction: The Spotipy library fetches data from the Spotify API, specifically from the "Discover Weekly" playlist.
 * Data Transformation: A Lambda function processes the raw data when it is added to S3. It organizes the data into structured formats (using AWS Glue for schema management) and stores the transformed data in the appropriate folders in S3.
@@ -65,16 +71,3 @@ Additional Improvements
 * Data Visualization: After loading the data into Snowflake, it can be connected to tools like Tableau, Power BI, or AWS QuickSight to create interactive dashboards and visualize key metrics from the "Discover Weekly" playlist.
 * Real-Time Data: For more advanced use cases, you could implement real-time data processing and loading into Snowflake using Snowflake Streams and Tasks.
 * Scaling: The pipeline is scalable, allowing you to extend it to other playlists or add more advanced data processing features.
-##### FAQs
-* How do I change the schedule for data extraction?
-
-The schedule can be modified by updating the cron expression in the EventBridge rule, which controls when the Lambda function is triggered to extract data from Spotify.
-* How does Snowflake handle duplicate data?
-
-Snowflake will not append duplicate data when the COPY INTO command is run. The data is loaded based on the unique identifiers and any existing duplicate data will not be reloaded unless the metadata is updated.
-Can I use a different cloud provider?
-
-Yes, this project can be implemented using other cloud platforms like Google Cloud Platform (GCP) or Microsoft Azure. Both offer similar services for ETL pipelines (e.g., BigQuery for analytics, Azure Blob Storage for data storage, etc.).\
-\
-\
- This README is designed to help users understand the architecture, steps, and technologies involved in building a Spotify Data Automation Pipeline using AWS and Snowflake. Feel free to expand on it based on your needs!
