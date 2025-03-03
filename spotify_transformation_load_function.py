@@ -48,7 +48,7 @@ def songs(data):
 
 def lambda_handler(event, context):
     s3 = boto3.client('s3')
-    Bucket = "spotify-etl-project-shweta"
+    Bucket = "spotifyetlp0"
     Key = "raw_data/to_processed/"
     
     #print(s3.list_objects(Bucket = Bucket, Prefix = Key))
@@ -82,8 +82,7 @@ def lambda_handler(event, context):
         
         song_df = pd.DataFrame.from_dict(song_list)
         
-        
-        album_df['release_date'] = pd.to_datetime(album_df['release_date']) 
+        album_df['release_date'] = pd.to_datetime(album_df['release_date'], errors='coerce')
         song_df['song_added'] = pd.to_datetime(song_df['song_added']) 
         
         
