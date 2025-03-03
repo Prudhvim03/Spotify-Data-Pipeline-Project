@@ -5,7 +5,7 @@ CREATE OR REPLACE STORAGE INTEGRATION spotify_s3_int
     STORAGE_PROVIDER = S3
     ENABLED = TRUE
     STORAGE_AWS_ROLE_ARN = ''
-    STORAGE_ALLOWED_LOCATIONS = ('s3://spotify-etl-project-shweta')
+    STORAGE_ALLOWED_LOCATIONS = ('s3://spotifyetlp0')
      COMMENT = 'creating connection to s3'
 
 DESC INTEGRATION spotify_s3_int;
@@ -44,7 +44,7 @@ CREATE OR REPLACE TABLE tblSongs(
 )
 
 CREATE OR REPLACE STAGE spotify_s3_int_stage
-  URL='s3://spotify-etl-project-shweta/transformed_data/'  
+  URL='s3://spotifyetlp0/transformed_data/'  
   STORAGE_INTEGRATION = spotify_s3_int
   FILE_FORMAT = csv_file_format;
 
@@ -108,6 +108,3 @@ DESC pipe SPOTIFY_ETL_PROJECT.pipes.songs_pipe;
 SELECT * FROM SPOTIFY_ETL_PROJECT.PUBLIC.tblalbum;  
 SELECT * FROM SPOTIFY_ETL_PROJECT.PUBLIC.tblArtist; 
 SELECT * FROM SPOTIFY_ETL_PROJECT.PUBLIC.tblSongs;  
-
-
-
